@@ -1,0 +1,70 @@
+from time import sleep
+from sense_hat import SenseHat
+sense = SenseHat()
+sense.set_rotation(270)
+r=(255,0,0)
+p=(255, 100, 200)
+b=(0,0,0)
+o=(255,130,0)
+bl=(0,0,255)
+c=(0,150,255)
+e=(80,80,80)
+g=(0,255,0)
+y=(255,255,0)
+
+picture=[
+  c, c, b, b, b, b, b, b,
+  c, b, c, b, b, b, b, b,
+  b, c, b, c, c, c, b, b,
+  b, b, c, b, c, c, b, b,
+  b, b, c, c, b, c, r, r,
+  b, b, c, b, c, r, r, b,
+  b, b, b, b, r, r, b, b,
+  b, b, b, b, r, b, b, b]
+  
+sense.set_pixels(picture)
+sleep(2)
+sense.show_message("Hello Astronauts!", text_colour=bl, back_colour=b, scroll_speed=0.07)
+sleep(1)
+
+wet = [
+  bl, bl, bl, bl, bl, bl, bl, bl,
+  bl, bl, bl, bl, bl, bl, bl, bl,
+  bl, o, bl, o, o, o, bl, bl,
+  bl, o, o, o, o, g, o, bl,
+  c, o, o, o, o, o, o, c,
+  c, o, c, o, o, o, c, c,
+  c, c, c, c, c, c, c, c,
+  c, c, c, c, c, c, c, c
+]
+
+
+dry = [
+  o, o, g, g, c, c, c, c,
+  o, o, g, g, c, g, c, c,
+  g, c, g, g, c, g, c, c,
+  g, c, g, g, c, g, c, y,
+  g, g, g, g, g, g, y, y,
+  c, c, g, g, c, y, y, y,
+  y, y, y, y, y, y, y, y,
+  y, y, y, y, y, y, y, y
+]
+
+humid = round(sense.get_humidity(), 1)
+
+if humid >= 40:
+  sense.show_message("It is " + str(humid)+ "% humidity", text_colour=bl, scroll_speed=0.07)
+if humid <= 40:
+  sense.show_message("It is " + str(humid)+ "% humidity", text_colour=o, scroll_speed=0.07)
+
+sleep(2)
+
+if humid >= 40:
+  sense.set_pixels(wet)
+if humid <= 40:
+  sense.set_pixels(dry)
+
+sleep(1.5)
+
+sense.show_message("Have a nice day!", text_colour=g, back_colour=b, scroll_speed=0.065)
+  

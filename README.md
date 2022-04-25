@@ -4,5 +4,5 @@
 A short message to ISS for Raspberry Pi computer.
 
 ## Technologies used:
-*Python 3.9.2 for Raspberry Pi
+*Python 3.9.2 
 
